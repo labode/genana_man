@@ -61,27 +61,22 @@ def analyse(data, graph, nrrd_array):
 
 
 if __name__ == '__main__':
-    genana_file = sys.argv[1]
-    dot_file = sys.argv[2]
-    nrrd_file = sys.argv[3]
-    output_csv = sys.argv[4]
+    try:
+        genana_file = sys.argv[1]
+        dot_file = sys.argv[2]
+        nrrd_file = sys.argv[3]
+        output_csv = sys.argv[4]
 
-    error = False
+    except IndexError:
+        sys.exit('Missing parameters \nPlease supply: generation file, dot graph, nrrd file,'
+                 ' output file name')
 
-    if not genana_file or not dot_file or not nrrd_file or not output_csv:
-        # TODO: Check types of inputs
-        print("Missing parameters")
-        # Explain the needed parameters to the user
-        print("Please supply: generation file, dot graph, nrrd file, output file name")
-        error = True
+    genana = read_csv(genana_file)
+    nrrd_data = read_nrrd(nrrd_file)
+    graph_data = read_graph(dot_file)
 
-    if not error:
-        genana = read_csv(genana_file)
-        nrrd_data = read_nrrd(nrrd_file)
-        graph_data = read_graph(dot_file)
-
-        results = analyse(genana, graph_data, nrrd_data)
-        write_csv(results, output_csv)
+    results = analyse(genana, graph_data, nrrd_data)
+    write_csv(results, output_csv)
 
 
 
