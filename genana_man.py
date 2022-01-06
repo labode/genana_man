@@ -26,10 +26,10 @@ def write_csv(data, target_file):
     output_file = open(filename, "w")
 
     # Write header
-    output_file.write("Id; Man_Gen;\n")
+    output_file.write("Id; Vertex Id; Man_Gen\n")
 
     for i in data:
-        output_file.write(str(i[0]) + '; ' + str(i[1]) + ';\n')
+        output_file.write(str(i[0]) + '; ' + str(i[1]) + '; ' + str(i[2]) + '\n')
 
 
 def read_graph(file):
